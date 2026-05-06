@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>옆커폰 창업 가이드북 | 미팅 전, 솔직하게 알려드립니다.</title>
+<title>옆커폰 창업 가이드북 | 미팅 전, 솔직하게 알려드립니다</title>
 <meta name="description" content="경험 없어도 됩니다. 초기 비용 700만원~. 전국 700+ 점주가 증명한 대한민국 1등 휴대폰 프랜차이즈 옆커폰. 미팅 전 궁금한 것, 솔직하게 알려드립니다.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -302,8 +302,11 @@ body {
 .ct-row {
   display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr;
   background: #fff; border-bottom: 1px solid var(--line);
+  opacity: 0; transform: translateX(-12px);
+  transition: opacity .35s ease, transform .35s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .ct-row:last-child { border-bottom: none; }
+.ct-row.row-in { opacity: 1; transform: translateX(0); }
 .ct-row > div { padding: 11px 8px; text-align: center; font-size: 12px; font-weight: 600; color: #4A4560; display: flex; align-items: center; justify-content: center; }
 .ct-row .ct-label { text-align: left; font-size: 12px; font-weight: 700; color: var(--navy); justify-content: flex-start; padding-left: 12px; }
 .ct-row .yeop-col { color: var(--navy); font-weight: 800; }
@@ -374,8 +377,11 @@ body {
 .ms-item {
   display: flex; align-items: flex-start; gap: 14px;
   padding: 14px 0; border-bottom: 1px solid var(--line);
+  opacity: 0; transform: translateX(-28px);
+  transition: opacity .45s ease, transform .45s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .ms-item:last-child { border-bottom: none; }
+.ms-item.ms-in { opacity: 1; transform: translateX(0); }
 
 .ms-dot-col { display: flex; flex-direction: column; align-items: center; gap: 0; padding-top: 3px; }
 
@@ -384,14 +390,25 @@ body {
   background: var(--navy); color: var(--gold2);
   display: flex; align-items: center; justify-content: center;
   font-size: 11px; font-weight: 900; flex-shrink: 0;
+  transform: scale(0);
+  transition: transform .5s cubic-bezier(0.34, 1.56, 0.64, 1) .08s;
 }
+.ms-item.ms-in .ms-num { transform: scale(1); }
 
 .ms-line {
   width: 2px; flex: 1; min-height: 24px; background: var(--line); margin: 4px 0;
+  transform: scaleY(0); transform-origin: top center;
+  transition: transform .45s ease .32s;
 }
+.ms-item.ms-in .ms-line { transform: scaleY(1); }
 .ms-item:last-child .ms-line { display: none; }
 
-.ms-text { flex: 1; padding-bottom: 6px; }
+.ms-text {
+  flex: 1; padding-bottom: 6px;
+  opacity: 0; transform: translateX(-8px);
+  transition: opacity .4s ease .15s, transform .4s ease .15s;
+}
+.ms-item.ms-in .ms-text { opacity: 1; transform: translateX(0); }
 
 .ms-title { font-size: 13.5px; font-weight: 800; color: var(--navy); margin-bottom: 3px; }
 .ms-desc { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.6; }
@@ -472,6 +489,12 @@ body {
 
 .disclaimer { font-size: 10px; color: var(--muted); line-height: 1.7; margin-top: 14px; }
 
+/* ── 섹션 fade-up ── */
+.fade-up {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity .5s ease, transform .5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.fade-up.fu-in { opacity: 1; transform: translateY(0); }
 
 .app-footer { text-align: center; padding: 6px 0 4px; font-size: 11px; color: #a294bd; font-weight: 500; }
 </style>
@@ -502,15 +525,15 @@ body {
 
     <div class="hero-badges">
       <div class="hb">
-        <div class="hb-val"><span>700</span><span class="u">+</span></div>
+        <div class="hb-val"><span class="count" data-count="700">0</span><span class="u">+</span></div>
         <div class="hb-lbl">검증된<br>가맹점 수</div>
       </div>
       <div class="hb">
-        <div class="hb-val"><span>2,800</span><span class="u">만</span></div>
+        <div class="hb-val"><span class="count" data-count="2800" data-format="comma">0</span><span class="u">만</span></div>
         <div class="hb-lbl">전국 월 평균<br>매출</div>
       </div>
       <div class="hb">
-        <div class="hb-val"><span>700</span><span class="u">만~</span></div>
+        <div class="hb-val"><span class="count" data-count="700">0</span><span class="u">만~</span></div>
         <div class="hb-lbl">최저<br>창업 비용</div>
       </div>
     </div>
@@ -522,7 +545,7 @@ body {
   </section>
 
   <!-- ══ FAQ ══ -->
-  <section class="card">
+  <section class="card fade-up">
     <div class="card-inner">
       <div class="section-eyebrow"><span class="dot"></span>FAQ</div>
       <h2 class="section-title">가장 많이 묻는<br>질문 <em>TOP 5</em></h2>
@@ -649,7 +672,7 @@ body {
   </section>
 
   <!-- ══ 수익 데이터 ══ -->
-  <section class="card">
+  <section class="card fade-up">
     <div class="card-inner">
       <div class="section-eyebrow"><span class="dot"></span>REVENUE DATA</div>
       <h2 class="section-title">투명하게 공개하는<br><em>실적</em> 데이터</h2>
@@ -658,33 +681,33 @@ body {
       <div class="rev-grid">
         <div class="rev-box">
           <div class="rb-lbl">월 최저</div>
-          <div class="rb-val"><span>1,690</span><span class="u">만</span></div>
+          <div class="rb-val"><span class="count" data-count="1690" data-format="comma">0</span><span class="u">만</span></div>
           <div class="rb-note">경기 C점</div>
         </div>
         <div class="rev-box center">
           <div class="rb-lbl">전국 평균</div>
-          <div class="rb-val"><span>2,800</span><span class="u">만</span></div>
+          <div class="rb-val"><span class="count" data-count="2800" data-format="comma">0</span><span class="u">만</span></div>
           <div class="rb-note">전국 가맹점 기준</div>
         </div>
         <div class="rev-box">
           <div class="rb-lbl">월 최고</div>
-          <div class="rb-val"><span>5,190</span><span class="u">만</span></div>
+          <div class="rb-val"><span class="count" data-count="5190" data-format="comma">0</span><span class="u">만</span></div>
           <div class="rb-note">인천 B점</div>
         </div>
       </div>
 
-      <p class="rev-note">전국 2,400만+ 건의 상담 데이터를 기반으로 만든 수익 구조</p>
+      <p class="rev-note">전국 <span class="count" data-count="2400" data-format="comma">0</span>만+ 건의 상담 데이터를 기반으로 만든 수익 구조</p>
 
       <div class="donut-wrap">
         <div class="donut-svg-wrap">
           <svg viewBox="0 0 200 200">
             <circle cx="100" cy="100" r="76" fill="none" stroke="#EDE8F8" stroke-width="28"/>
             <circle cx="100" cy="100" r="76" fill="none" stroke="#1A2744" stroke-width="28"
-              stroke-dasharray="238.8 477.5" stroke-dashoffset="0" transform="rotate(-90 100 100)"/>
+              class="donut-seg" data-dash="238.8" stroke-dasharray="0 477.5" stroke-dashoffset="0" transform="rotate(-90 100 100)"/>
             <circle cx="100" cy="100" r="76" fill="none" stroke="#F5A623" stroke-width="28"
-              stroke-dasharray="143.3 477.5" stroke-dashoffset="-238.8" transform="rotate(-90 100 100)"/>
+              class="donut-seg" data-dash="143.3" stroke-dasharray="0 477.5" stroke-dashoffset="-238.8" transform="rotate(-90 100 100)"/>
             <circle cx="100" cy="100" r="76" fill="none" stroke="#E8596A" stroke-width="28"
-              stroke-dasharray="95.5 477.5" stroke-dashoffset="-382.1" transform="rotate(-90 100 100)"/>
+              class="donut-seg" data-dash="95.5" stroke-dasharray="0 477.5" stroke-dashoffset="-382.1" transform="rotate(-90 100 100)"/>
           </svg>
           <div class="donut-center">
             <div class="dc-lbl">수익 구조</div>
@@ -718,7 +741,7 @@ body {
   </section>
 
   <!-- ══ 비교 테이블 ══ -->
-  <section class="card">
+  <section class="card fade-up">
     <div class="card-inner">
       <div class="section-eyebrow"><span class="dot"></span>COMPARISON</div>
       <h2 class="section-title">다른 창업과<br>비교하면 <span class="g">얼마나</span> 다를까요?</h2>
@@ -772,13 +795,13 @@ body {
   </section>
 
   <!-- ══ 점주 인터뷰 ══ -->
-  <section class="card">
+  <section class="card fade-up">
     <div class="card-inner">
       <div class="section-eyebrow"><span class="dot"></span>SUCCESS STORIES</div>
       <h2 class="section-title">먼저 시작한 <em>점주님</em>들이<br>직접 말씀해 주십니다.</h2>
 
       <div class="store-count-bar">
-        <div class="sc-num"><span>700</span><span class="u">+</span></div>
+        <div class="sc-num"><span class="count" data-count="700">0</span><span class="u">+</span></div>
         <div class="sc-text"><strong>전국 700개 이상의 매장</strong>에서 점주님들이 일구어낸 실제 이야기입니다. 과장 없이, 본인들의 언어로 직접 전합니다.</div>
       </div>
 
@@ -798,7 +821,7 @@ body {
   </section>
 
   <!-- ══ 미팅 안내 ══ -->
-  <section class="card">
+  <section class="card fade-up">
     <div class="card-inner">
       <div class="section-eyebrow"><span class="dot"></span>MEETING GUIDE</div>
       <h2 class="section-title">미팅은 이렇게<br>진행됩니다.</h2>
@@ -855,7 +878,7 @@ body {
   </section>
 
   <!-- ══ CTA ══ -->
-  <section class="card">
+  <section class="card fade-up">
     <div class="card-inner">
       <div class="section-eyebrow"><span class="dot"></span>NEXT STEP</div>
       <h2 class="section-title">지금 미팅을<br>결정해야 하는 이유</h2>
@@ -905,6 +928,87 @@ body {
 
 <script>
 (function () {
+  const DUR = 1600;
+  function easeOut(t) { return 1 - Math.pow(1 - t, 4); }
+  function fmt(v, f) {
+    const r = Math.round(v);
+    return f === 'comma' ? r.toLocaleString('ko-KR') : String(r);
+  }
+
+  function animCount(el) {
+    if (el.dataset.animated) return;
+    el.dataset.animated = '1';
+    const target = parseFloat(el.dataset.count);
+    const format = el.dataset.format || null;
+    const s = performance.now();
+    (function tick(now) {
+      const p = Math.min((now - s) / DUR, 1);
+      el.textContent = fmt(target * easeOut(p), format);
+      if (p < 1) requestAnimationFrame(tick);
+    })(s);
+  }
+
+  function animDonut(el) {
+    if (el.dataset.animated) return;
+    el.dataset.animated = '1';
+    const dash = parseFloat(el.dataset.dash);
+    const total = 477.5;
+    const s = performance.now();
+    (function tick(now) {
+      const p = Math.min((now - s) / DUR, 1);
+      el.setAttribute('stroke-dasharray', (dash * easeOut(p)) + ' ' + total);
+      if (p < 1) requestAnimationFrame(tick);
+    })(s);
+  }
+
+  /* ── fade-up: scroll 기반 (iOS Safari IntersectionObserver 버그 우회) ── */
+  const fadeEls = Array.from(document.querySelectorAll('.fade-up'));
+  function revealFadeUps() {
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    fadeEls.forEach(el => {
+      if (el.classList.contains('fu-in')) return;
+      if (el.getBoundingClientRect().top < vh + 80) el.classList.add('fu-in');
+    });
+  }
+  window.addEventListener('scroll', revealFadeUps, { passive: true });
+  window.addEventListener('resize', revealFadeUps, { passive: true });
+  revealFadeUps();
+  setTimeout(revealFadeUps, 300);
+  setTimeout(() => fadeEls.forEach(el => el.classList.add('fu-in')), 6000);
+
+  /* ── 카운트·도넛: IntersectionObserver 유지 ── */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const t = e.target;
+      if (t.classList.contains('count'))     { animCount(t);  io.unobserve(t); }
+      if (t.classList.contains('donut-seg')) { animDonut(t);  io.unobserve(t); }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.count[data-count]').forEach(el => io.observe(el));
+  document.querySelectorAll('.donut-seg').forEach(el => io.observe(el));
+
+  /* ── 비교 테이블 row stagger ── */
+  const compareTable = document.getElementById('compareTable');
+  if (compareTable) {
+    const rows = compareTable.querySelectorAll('.ct-row');
+    new IntersectionObserver(entries => {
+      if (!entries[0].isIntersecting) return;
+      rows.forEach((r, i) => setTimeout(() => r.classList.add('row-in'), i * 90));
+    }, { threshold: 0.1 }).observe(compareTable);
+  }
+
+  /* ── 미팅 스텝 순차 등장 ── */
+  const meetingSteps = document.getElementById('meetingSteps');
+  if (meetingSteps) {
+    const items = meetingSteps.querySelectorAll('.ms-item');
+    new IntersectionObserver(entries => {
+      if (!entries[0].isIntersecting) return;
+      items.forEach((it, i) => setTimeout(() => it.classList.add('ms-in'), i * 380));
+    }, { threshold: 0.05 }).observe(meetingSteps);
+  }
+
   /* ── FAQ 아코디언 ── */
   document.querySelectorAll('.faq-item').forEach(item => {
     const q   = item.querySelector('.faq-q');
