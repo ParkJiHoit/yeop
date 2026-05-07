@@ -39,7 +39,7 @@ body {
 .page {
   max-width: 560px;
   margin: 0 auto;
-  padding: 14px 14px 56px;
+  padding: 0 0 56px;
 }
 
 /* ── 공통 카드 ── */
@@ -47,7 +47,7 @@ body {
   background: rgba(255,255,255,0.32);
   margin-bottom: 3px;
 }
-.card-inner { padding: 20px 0; }
+.card-inner { padding: 20px 16px; }
 
 .section-eyebrow {
   display: inline-flex; align-items: center; gap: 7px;
@@ -88,8 +88,8 @@ body {
 ════════════════════════ */
 .hero-card {
   background: var(--grad-navy);
-  border-radius: 24px; overflow: hidden;
-  margin-bottom: 20px; position: relative;
+  border-radius: 0; overflow: hidden;
+  margin-bottom: 3px; position: relative;
 }
 .hero-card::before {
   content: ""; position: absolute; inset: 0;
@@ -494,6 +494,26 @@ body {
 .fade-up.fu-in { opacity: 1; transform: translateY(0); }
 
 .app-footer { text-align: center; padding: 6px 0 4px; font-size: 11px; color: #a294bd; font-weight: 500; }
+
+/* ── 데스크탑 반응형 (640px+) ── */
+@media (min-width: 640px) {
+  .page {
+    padding: 32px 24px 80px;
+    max-width: 680px;
+  }
+  .card {
+    border-radius: 16px;
+    box-shadow: 0 2px 20px -4px rgba(26,39,68,.10);
+    margin-bottom: 14px;
+  }
+  .card-inner {
+    padding: 28px 24px;
+  }
+  .hero-card {
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+}
 </style>
 </head>
 <body>
