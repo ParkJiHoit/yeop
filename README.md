@@ -37,8 +37,7 @@ body {
 }
 
 .page {
-  max-width: 560px;
-  margin: 0 auto;
+  width: 100%;
   padding: 0 0 56px;
 }
 
@@ -497,22 +496,41 @@ body {
 
 /* ── 데스크탑 반응형 (640px+) ── */
 @media (min-width: 640px) {
-  .page {
-    padding: 32px 24px 80px;
-    max-width: 680px;
-  }
+  /* page: full-width, 하단 여백만 */
+  .page { width: 100%; padding: 0 0 80px; }
+
+  /* 섹션: 화면 꽉 차는 밴드, 흰 배경, 얇은 구분선 */
   .card {
-    border-radius: 16px;
-    box-shadow: 0 2px 20px -4px rgba(26,39,68,.10);
-    margin-bottom: 14px;
+    background: #fff;
+    border-radius: 0;
+    box-shadow: none;
+    margin-bottom: 0;
+    border-bottom: 1px solid var(--line);
   }
+  .card:last-of-type { border-bottom: none; }
+
+  /* 섹션 내부 콘텐츠: 최대 900px 중앙 정렬 */
+  /* max(48px, calc(50% - 450px)) → 뷰포트가 넓어질수록 자동 중앙 정렬 */
   .card-inner {
-    padding: 28px 24px;
+    padding: 64px max(48px, calc(50% - 450px));
   }
-  .hero-card {
-    border-radius: 20px;
-    margin-bottom: 14px;
-  }
+
+  /* 히어로: full-width 네이비 밴드, 내부 요소 개별 중앙 정렬 */
+  .hero-card { border-radius: 0; margin-bottom: 0; }
+  .hero-top  { padding: 36px max(48px, calc(50% - 450px)) 0; }
+  .hero-body { padding: 32px max(48px, calc(50% - 450px)) 0; }
+  .hero-badges { padding: 0 max(48px, calc(50% - 450px)) 40px; }
+  .hero-strip  { padding: 18px max(48px, calc(50% - 450px)); }
+
+  /* 데스크탑용 폰트 크기 확대 */
+  .hero-h1      { font-size: 46px; }
+  .hero-desc    { font-size: 16px; }
+  .section-title { font-size: 30px; }
+  .section-sub  { font-size: 14px; }
+
+  /* 수익 그리드 · 비교테이블 여백 */
+  .rev-grid { gap: 14px; }
+  .compare-table { border-radius: 16px; overflow: hidden; }
 }
 </style>
 </head>
