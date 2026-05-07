@@ -1,3 +1,4 @@
+<!doctype html>
 <html lang="ko">
 <head>
 <meta charset="utf-8">
@@ -43,13 +44,10 @@ body {
 
 /* ── 공통 카드 ── */
 .card {
-  background: var(--cream);
-  border-radius: 24px;
-  overflow: hidden;
-  margin-bottom: 12px;
-  box-shadow: 0 4px 24px -8px rgba(26,39,68,.13);
+  background: rgba(255,255,255,0.32);
+  margin-bottom: 3px;
 }
-.card-inner { padding: 24px 20px; }
+.card-inner { padding: 20px 0; }
 
 .section-eyebrow {
   display: inline-flex; align-items: center; gap: 7px;
@@ -91,7 +89,7 @@ body {
 .hero-card {
   background: var(--grad-navy);
   border-radius: 24px; overflow: hidden;
-  margin-bottom: 12px; position: relative;
+  margin-bottom: 20px; position: relative;
 }
 .hero-card::before {
   content: ""; position: absolute; inset: 0;
@@ -960,33 +958,20 @@ body {
     })(s);
   }
 
-  /* ── fade-up: scroll 기반 (iOS Safari IntersectionObserver 버그 우회) ── */
-  const fadeEls = Array.from(document.querySelectorAll('.fade-up'));
-  function revealFadeUps() {
-    const vh = window.innerHeight || document.documentElement.clientHeight;
-    fadeEls.forEach(el => {
-      if (el.classList.contains('fu-in')) return;
-      if (el.getBoundingClientRect().top < vh + 80) el.classList.add('fu-in');
-    });
-  }
-  window.addEventListener('scroll', revealFadeUps, { passive: true });
-  window.addEventListener('resize', revealFadeUps, { passive: true });
-  revealFadeUps();
-  setTimeout(revealFadeUps, 300);
-  setTimeout(() => fadeEls.forEach(el => el.classList.add('fu-in')), 6000);
-
-  /* ── 카운트·도넛: IntersectionObserver 유지 ── */
+  /* ── 공통 IntersectionObserver ── */
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (!e.isIntersecting) return;
       const t = e.target;
-      if (t.classList.contains('count'))     { animCount(t);  io.unobserve(t); }
-      if (t.classList.contains('donut-seg')) { animDonut(t);  io.unobserve(t); }
+      if (t.classList.contains('count'))     animCount(t);
+      if (t.classList.contains('donut-seg')) animDonut(t);
+      if (t.classList.contains('fade-up'))   t.classList.add('fu-in');
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.12 });
 
   document.querySelectorAll('.count[data-count]').forEach(el => io.observe(el));
   document.querySelectorAll('.donut-seg').forEach(el => io.observe(el));
+  document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 
   /* ── 비교 테이블 row stagger ── */
   const compareTable = document.getElementById('compareTable');
